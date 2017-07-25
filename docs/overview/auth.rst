@@ -4,7 +4,7 @@ The **Checkfront API** is accessable via a secure authenticated HTTPS connection
 
 Setting Up Your Application
 ---------------------------
-To start setting up your application, open your Checkfront account page and use the menu to navigate your browser to **Manage > Developer**.  
+To start setting up your application, open your Checkfront account page and use the menu to navigate your browser to **Manage > Developer**.
 This page will provide access to a listing of your active application clients, as well as containing your webhook notifications configuration under the "**Webhooks**" tab, and :doc:`../guide/dev_console`.
 
 Click the "**New Application**" button in the upper-left corner, and *carefully* read the terms of service provided.
@@ -25,7 +25,7 @@ Please see `our SDKs <https://github.com/Checkfront>`_ or support libraries for 
 
 Obtaining API Credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-After you choose an application name (for your own reference), an authentication type, and accept the terms of service, you can click "**Create**" to save and return to your application listing.  
+After you choose an application name (for your own reference), an authentication type, and accept the terms of service, you can click "**Create**" to save and return to your application listing.
 
 **Click on your new application** to show the credentials used to connect your application to the API.
 
@@ -79,24 +79,24 @@ Logging in with a Staff Account
 	| **redirect_uri** | The URI to return your user to after authorization.                            |
 	+------------------+--------------------------------------------------------------------------------+
 
-#. Upon completion of authorization, the staff user will be sent to the redirect_uri specified, passing a **code** parameter in the query string that must be exchanged by your application for an access/refresh token pair within 60 seconds.  
+#. Upon completion of authorization, the staff user will be sent to the redirect_uri specified, passing a **code** parameter in the query string that must be exchanged by your application for an access/refresh token pair within 60 seconds.
 
-	To exchange the code for an access token, make a call to your **Access Token URL** (eg. ``https://your-company.checkfront.com/oauth/token/``) with the following parameters set: 
+	To exchange the code for an access token, make a call to your **Access Token URL** (eg. ``https://your-company.checkfront.com/oauth/token/``) with the following parameters set:
 
 	+------------------+--------------------------------------------------------------------------------+
 	| **client_id**    | *Should be sent as HTTP Basic credentials.*  See :ref:`consumer-key-secret`.   |
 	+------------------+--------------------------------------------------------------------------------+
 	| **client_secret**| *Should be sent as HTTP Basic credentials.*  See :ref:`consumer-key-secret`.   |
-	+------------------+--------------------------------------------------------------------------------+	
+	+------------------+--------------------------------------------------------------------------------+
 	| **grant_type**   | **MUST** be set to ``authorization_code``                                      |
 	+------------------+--------------------------------------------------------------------------------+
 	| **code**         | The authorization code as returned in the client's GET request to your page.   |
-	+------------------+--------------------------------------------------------------------------------+	
+	+------------------+--------------------------------------------------------------------------------+
 	| **redirect_uri** | The URI to return your user to after authorization.                            |
-	+------------------+--------------------------------------------------------------------------------+	
-	
+	+------------------+--------------------------------------------------------------------------------+
 
-#. Store the token returned by the previous call in a *secure* database along with a field containing the timestamp of most recent update to the token.  Your tokens should be refreshed on a regular basis as long as the authorization continues to be used.  
+
+#. Store the token returned by the previous call in a *secure* database along with a field containing the timestamp of most recent update to the token.  Your tokens should be refreshed on a regular basis as long as the authorization continues to be used.
 
 	Your application should store and make use of the following fields from the response:
 
@@ -104,14 +104,14 @@ Logging in with a Staff Account
 	| **access_token**  | *string*  | See :ref:`access-token`.                                          |
 	+-------------------+-----------+-------------------------------------------------------------------+
 	| **expires_in**    | *integer* | The time (in seconds) after which the *access* token will expire. |
-	+-------------------+-----------+-------------------------------------------------------------------+	
+	+-------------------+-----------+-------------------------------------------------------------------+
 	| **refresh_token** | *string*  | See :ref:`refresh-token`.                                         |
-	+-------------------+-----------+-------------------------------------------------------------------+	
+	+-------------------+-----------+-------------------------------------------------------------------+
 
 
 Using and Maintaining OAuth2 Tokens
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-While your first authentication will provide a usable access token for identifying with the server, the access token has a fixed lifetime and must be refreshed in order to maintain access to the API.  
+While your first authentication will provide a usable access token for identifying with the server, the access token has a fixed lifetime and must be refreshed in order to maintain access to the API.
 
 See :ref:`refresh-token` and other details below for information on performing a refresh.
 
@@ -127,13 +127,13 @@ There are two important endpoints used in authenticating tokens using OAuth2, wh
 * Your **Authorize Token URL** is used when redirecting a user to grant permission to use their account.  On success, this will return a code for you to pass to the *Access Token URL* to grant a token you can use to access the API.
 
 	::
-	
+
 		https://your-company.checkfront.com/oauth/
 
 * Your **Access Token URL** is used for granting access tokens from code requests, and refreshing existing access/refresh tokens.
 
 	::
-	
+
 		https://your-company.checkfront.com/oauth/token/
 
 
@@ -142,7 +142,7 @@ There are two important endpoints used in authenticating tokens using OAuth2, wh
 Consumer Key / Consumer Secret
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 These are generated when setting up your application and can be found on your Checkfront developer page.
-Your consumer key and secret allow your application to grant and refresh tokens on behalf of your users.  
+Your consumer key and secret allow your application to grant and refresh tokens on behalf of your users.
 
 .. warning::
 
@@ -159,7 +159,7 @@ See ``CURLOPT_USERPWD`` if working with cURL, or the documentation on HTTP Basic
 
 Access Token
 ~~~~~~~~~~~~
-This is used by the API server to identify you and allow the application to act on your behalf.  When using OAuth2 for your application, an access token is **required** to be sent with **all** API calls to secure data endpoints. 
+This is used by the API server to identify you and allow the application to act on your behalf.  When using OAuth2 for your application, an access token is **required** to be sent with **all** API calls to secure data endpoints.
 
 Access tokens have a lifetime of **14000 seconds** (this will be returned as ``expires_in`` when new tokens are granted), after which they must be *refreshed* to obtain a new token.  Your application should keep track of when this token will be expiring and check if it needs refreshing before attempting a request.
 
@@ -172,24 +172,24 @@ It will also be accepted in the form of the query string parameter ``access_toke
 	access_token=f58ef579d0bb5ffb3b5bb0985a85e21a
 
 
-.. _refresh-token:	
-	
+.. _refresh-token:
+
 Refresh Token
 ~~~~~~~~~~~~~
 
 After your current **access token** has expired, this token can be passed to create a new access/refresh token pair, which must completely replace your previously stored token (which will be invalidated).
 
-To exchange the the refresh token for a new access/refresh token pair, make a call to your **Access Token URL** (eg. ``https://your-company.checkfront.com/oauth/token/``) with the following parameters set: 
+To exchange the the refresh token for a new access/refresh token pair, make a call to your **Access Token URL** (eg. ``https://your-company.checkfront.com/oauth/token/``) with the following parameters set:
 
 	+------------------+--------------------------------------------------------------------------------+
 	| **client_id**    | *Should be sent as HTTP Basic credentials.*  See :ref:`consumer-key-secret`.   |
 	+------------------+--------------------------------------------------------------------------------+
 	| **client_secret**| *Should be sent as HTTP Basic credentials.*  See :ref:`consumer-key-secret`.   |
-	+------------------+--------------------------------------------------------------------------------+	
+	+------------------+--------------------------------------------------------------------------------+
 	| **grant_type**   | **MUST** be set to ``refresh_token``                                           |
 	+------------------+--------------------------------------------------------------------------------+
 	| **refresh_token**| The current (active) refresh token for this user.                              |
-	+------------------+--------------------------------------------------------------------------------+	
+	+------------------+--------------------------------------------------------------------------------+
 
 
 Refresh tokens have a lifetime of **14 days** from issue, after which (if allowed to expire) you must generate a new access/refresh token pair to regain application authorization.
