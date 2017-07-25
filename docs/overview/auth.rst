@@ -3,6 +3,10 @@ Connecting to the API
 The **Checkfront API** is accessable via a secure authenticated HTTPS connection to our hosted services, and is isolated to your subscription.
 This requires your application to have the ability to connect to external servers using SSL and one of the identity token services provided to your Checkfront account.
 
+.. note::
+	On June 29, 2017, Checkfront ended support for TLS 1.1 and TLS 1.0 encryption, and began requiring TLS 1.2 for all connections, including API.
+	This was a necessary change stemming from the Payment Card Industry’s recommended protocols for secure e-commerce facilitation and data encryption.
+
 Setting Up Your Application
 ---------------------------
 To start setting up your application, open your Checkfront account page and use the menu to navigate your browser to **Manage > Developer**.
