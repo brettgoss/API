@@ -1,6 +1,7 @@
 Connecting to the API
 =====================
-The **Checkfront API** is accessable via a secure authenticated HTTPS connection to our hosted services, and is isolated to your subscription.  This requires your application to have the ability to connect to external servers using SSL and one of the identity token services provided to your Checkfront account.
+The **Checkfront API** is accessable via a secure authenticated HTTPS connection to our hosted services, and is isolated to your subscription.
+This requires your application to have the ability to connect to external servers using SSL and one of the identity token services provided to your Checkfront account.
 
 Setting Up Your Application
 ---------------------------
@@ -11,17 +12,23 @@ Click the "**New Application**" button in the upper-left corner, and *carefully*
 
 Choosing Your Workflow
 ^^^^^^^^^^^^^^^^^^^^^^
-When adding your application, you will be given a choice between two "authentication types".  The method you choose for your application is largely determined by the intended use and scope of your application, and in certain cases you may choose to add more than one access method to your account.
+When adding your application, you will be given a choice between two "authentication types".
+The method you choose for your application is largely determined by the intended use and scope of your application, and in certain cases you may choose to add more than one access method to your account.
 
 Token Authentication
 ~~~~~~~~~~~~~~~~~~~~
-**Token** authentication makes use of a simple static private key and secret that can be used for *server-to-server communication only*.  For example, this can be used by an application running on your **private web server** to create a customer-facing booking page.  Applications using this method can only be used privately within your organization, and *must not be distributed*.
+**Token** authentication makes use of a simple static private key and secret that can be used for *server-to-server communication only*.
+For example, this can be used by an application running on your **private web server** to create a customer-facing booking page.
+Applications using this method can only be used privately within your organization, and *must not be distributed*.
 
 OAuth2 Authentication
 ~~~~~~~~~~~~~~~~~~~~~
-**OAuth2** is a secure `open standard <http://tools.ietf.org/html/rfc6749>`_ providing a simple transparent avenue of authenticating with the API.  Using this method of authentication can allow your application to act on behalf of individual members of your staff by allowing them to "log in" and grant permission to the app.  This is ideal for any case where you want to allow your staff to (for example) make or change bookings in the system.
+**OAuth2** is a secure `open standard <http://tools.ietf.org/html/rfc6749>`_ providing a simple transparent avenue of authenticating with the API.
+Using this method of authentication can allow your application to act on behalf of individual members of your staff by allowing them to "log in" and grant permission to the app.
+This is ideal for any case where you want to allow your staff to (for example) make or change bookings in the system.
 
-Please see `our SDKs <https://github.com/Checkfront>`_ or support libraries for `OAuth2 <http://oauth.net/2/>`_ in your preferred environment.  If we don't have an example for your language, there are `many libraries <http://oauth.net/2/>`_ and documentation available for various programming languages that provide all the functionality you'll need to implement a custom OAuth2 solution.
+Please see `our SDKs <https://github.com/Checkfront>`_ or support libraries for `OAuth2 <http://oauth.net/2/>`_ in your preferred environment.
+If we don't have an example for your language, there are `many libraries <http://oauth.net/2/>`_ and documentation available for various programming languages that provide all the functionality you'll need to implement a custom OAuth2 solution.
 
 Obtaining API Credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -31,7 +38,7 @@ After you choose an application name (for your own reference), an authentication
 
 .. warning::
 
-	Your API credentials provide your application with access to private data stored on your account and the ability to act on your behalf.  Treat these as you would your password, and be careful not to distribute or send these to untrusted parties.
+	Your API credentials provide your application with access to private data stored on your account and the ability to act on your behalf. Treat these as you would your password, and be careful not to distribute or send these to untrusted parties.
 
 
 If you are using the SDK, see :doc:`../guide/sdk_setup`
@@ -39,7 +46,7 @@ If you are using the SDK, see :doc:`../guide/sdk_setup`
 
 .. note::
 
-	Much of the following documentation is intended for custom integrations and understanding of the protocols involved in authentication.  Our `SDK resources <https://github.com/Checkfront>`_ abstract the complex authentication processes to simplify development of your application.
+	Much of the following documentation is intended for custom integrations and understanding of the protocols involved in authentication.	Our `SDK resources <https://github.com/Checkfront>`_ abstract the complex authentication processes to simplify development of your application.
 
 .. _auth-token:
 
@@ -55,7 +62,8 @@ If you are using token authentication, your application will provide you with tw
 
 When sent together in a request header using HTTP Basic authorization, these allow direct access to API endpoints without any additional preamble.
 
-See ``CURLOPT_USERPWD`` if working with cURL libraries, or the documentation on *HTTP Basic authentication* relevant to your chosen framework.  If building your requests manually, HTTP Basic credentials are **base64 encoded** in the sequence "``username:password``" and sent in the **request header** in the following format:
+See ``CURLOPT_USERPWD`` if working with cURL libraries, or the documentation on *HTTP Basic authentication* relevant to your chosen framework.
+If building your requests manually, HTTP Basic credentials are **base64 encoded** in the sequence "``username:password``" and sent in the **request header** in the following format:
 
 .. sourcecode:: http
 
@@ -124,7 +132,7 @@ Authorization Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~
 There are two important endpoints used in authenticating tokens using OAuth2, which are both displayed when viewing the application key setup on your Checkfront developer page.
 
-* Your **Authorize Token URL** is used when redirecting a user to grant permission to use their account.  On success, this will return a code for you to pass to the *Access Token URL* to grant a token you can use to access the API.
+* Your **Authorize Token URL** is used when redirecting a user to grant permission to use their account. On success, this will return a code for you to pass to the *Access Token URL* to grant a token you can use to access the API.
 
 	::
 
@@ -146,7 +154,7 @@ Your consumer key and secret allow your application to grant and refresh tokens 
 
 .. warning::
 
-	You consumer key and secret should **only** be sent together when making calls to your **Access Token URL**.  When your application is making calls to endpoints requiring a valid access token, the key/secret pair **should not** be sent.
+	You consumer key and secret should **only** be sent together when making calls to your **Access Token URL**. When your application is making calls to endpoints requiring a valid access token, the key/secret pair **should not** be sent.
 
 As with token pairs (see above), these can (and should) be sent as HTTP Basic credentials. *However*, these can only be sent in this manner to the **/oauth/token/** (code/refresh) endpoint.  Your request will be *rejected* if you attempt to send these to an /api/ endpoint.
 
