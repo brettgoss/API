@@ -1,11 +1,12 @@
 Response Formatting
 ===================
 
-All responses from the API are formatted as **JSON** (JavaScript Object Notation) objects containing information related to the request, and any status. Every modern language should have libraries capable of quickly parsing JSON objects. See `json.org <http://json.org/>`_ for more information.
+All responses from the API are formatted as **JSON** (JavaScript Object Notation) objects containing information related to the request, and any status.
+Every modern language should have libraries capable of quickly parsing JSON objects. See `json.org <http://json.org/>`_ for more information.
 
 .. seealso::
 
-	For JSON decoding libraries in common environments, see: 
+	For JSON decoding libraries in common environments, see:
 
 	- PHP: `json_decode <http://php.net/json_decode>`_
 	- Python: `json.JSONDecoder <http://docs.python.org/library/json.html#json.JSONDecoder>`_
@@ -15,7 +16,7 @@ All responses from the API are formatted as **JSON** (JavaScript Object Notation
 
 
 All responses from the API will include some information related to the processing of the request, such as the following:
-	
+
 +---------------------------+------------------+--------------------------------------------------------------+
 | Field                     | Type             | Description                                                  |
 +===========================+==================+==============================================================+

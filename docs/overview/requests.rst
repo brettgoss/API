@@ -1,11 +1,11 @@
 Request Formatting
 ==================
 
-All requests made to the server are sent over an encrypted SSL connection using standard HTTPS methods such as **GET** and **POST**.  
+All requests made to the server are sent over an encrypted SSL connection using standard HTTPS methods such as **GET** and **POST**.
 
 When submitting input parameters with your request, these are encoded either in the query string for GET requests, or in the body of a POST request using commonplace url encoding of key-value pairs (:mimetype:`application/x-www-form-urlencoded`).
 
-The headers of your request should also include the IP of the client you're forwarding for, as well as the credentials used to authenticate with the API.  If you have an open session on the server, you can also pass in a **session_id** cooking containing the ID to have it automatically reopened.
+The headers of your request should also include the IP of the client you're forwarding for, as well as the credentials used to authenticate with the API. If you have an open session on the server, you can also pass in a **session_id** cooking containing the ID to have it automatically reopened.
 
 +--------------------+-------------------------------------------------------------------------+
 | **X-Forwarded-For**| The IP address of the connecting client.                                |
@@ -34,4 +34,4 @@ For example, to query a list of bookings with a status of PAID starting today, y
 
 	:reqheader Authorization: Credentials used to query the API. See :ref:`auth-token` or :ref:`oauth2-ref`.
 	:reqheader X-On-Behalf: The staff account to act on behalf of.  Use "off" to act as a customer.
-	:reqheader X-Forwarded-For: The IP address of the connecting client/customer. 
+	:reqheader X-Forwarded-For: The IP address of the connecting client/customer.
